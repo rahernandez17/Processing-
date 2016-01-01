@@ -1,3 +1,6 @@
+//Raul Andrés Hernandez Ocampo
+//Jamundí- Valle del Cauca- Colombia
+
 final int ancho=600,alto=600;
 final int colores[]={#FF0000,#0D00FF,#FFFF11,#1AFF00}/*Rojo, Azul, Amarillo, verde*/;
 float origen_x[]={-40,315},origen_y[]={315,-25};
