@@ -1,0 +1,65 @@
+final int ancho=600,alto=600;
+final int colores[]={#FF0000,#0D00FF,#FFFF11,#1AFF00}/*Rojo, Azul, Amarillo, verde*/;
+float origen_x[]={-40,315},origen_y[]={315,-25};
+int numero_rotulos=8;
+final float constante_medidas_plano=37.5;
+void setup(){
+  size(600,600);
+  background(0);
+  stroke(255);
+  dibujar_plano();
+  pintar_vector(5,-3);
+  pintar_vector(-4,4);
+}
+
+void draw(){
+  if(key == ESC){
+    exit();  
+  }
+}
+void dibujar_plano(){
+  int x=-numero_rotulos,y=numero_rotulos;
+  String rotulo_x="",rotulo_y="";
+  /*Eje x*/  line(0,300.5,600,300.5);
+  /*Eje y*/  line(300.5,0,300.5,600);
+  //Lineas indicadoras de posición en el plano
+  for(float i = 0;i<=600;i=i+constante_medidas_plano){
+    line(i,297,i,304);
+    line(297,i,304,i);
+  }
+  /*Rotulos Eje X y Y*/
+  if((constante_medidas_plano >= 30)){
+    if((constante_medidas_plano == 60)){origen_x[0]=-65;origen_y[1]=-60;}
+    else if((constante_medidas_plano == 100)){origen_x[0]=-105;origen_y[1]=-100;}
+    else if((constante_medidas_plano == 150)){origen_x[0]=-155;origen_y[1]=-150;}
+    else if((constante_medidas_plano == 37.5)){origen_x[0]=-42.5;origen_y[1]=-37.5;}
+    for(int i=0;i<=(numero_rotulos*2);i++){
+      rotulo_x=str(x);
+      rotulo_y=str(y);
+      origen_x[0]=origen_x[0]+constante_medidas_plano;
+      origen_y[1]=origen_y[1]+constante_medidas_plano;
+      if((x != 0 || y != 0)){text(rotulo_x,origen_x[0],origen_x[1]);text(rotulo_y,origen_y[0],origen_y[1]);}
+      x++;y--;
+    }
+  }
+  textSize(20);fill(colores[2]);text("y",330,10);text("x",580,330);
+}
+void pintar_vector(float x, float y){
+  line((height/2),(width/2),(height/2)+(x*constante_medidas_plano),(width/2)-(y*constante_medidas_plano));
+  ellipse((height/2)+(x*constante_medidas_plano),(width/2)-(y*constante_medidas_plano),10,10);
+}
+/*Depende del número de rótulos y es el número que ayudará a sincronizar los tamaños respecto al plano.
+Ecuación--->  constante medidas plano=dimensión de la mitad de la pantalla / rotulos que se quieren*/
+/**  Guías!!! Leer!! Importante!!
+  2 rótulos= 150 CMP [-2,2]
+  3 rótulos= 100 CMP [-3,3]
+  5 rótulos= 60 CMP [-5,5]
+  8 rótulos= 37.5 CMP [-8,8]
+  10 rótulos= 30 CMP [-10,10]
+  15 rótulos= 20 CMP [-15,15]
+  20 rótulos= 15 CMP [-20,20]
+  25 rótulos= 12 CMP [-25,25]
+  30 rótulos= 10 CMP [-30,30]
+  35 rótulos= 60/7 CMP [-35,35]
+  40 rótulos= 15/2 CMP [-40,40]
+*/  
